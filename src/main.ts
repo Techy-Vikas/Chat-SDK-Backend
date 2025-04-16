@@ -1,16 +1,21 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // Swagger Config
+  // ✅ Enable CORS for multiple origins
+  app.enableCors({
+    origin: ['http://localhost:3000', 'http://localhost:3001'],
+    credentials: true,
+  });
+
   const config = new DocumentBuilder()
     .setTitle('ChatGPT API')
     .setDescription('ChatGPT + Auth APIs')
     .setVersion('1.0')
-    .addBearerAuth() // 👈 Adds Authorization header
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
