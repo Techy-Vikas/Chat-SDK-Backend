@@ -10,8 +10,14 @@ interface User {
 
 @Injectable()
 export class AuthService {
-  private users: User[] = [];
+  private users: User[] = [ {
+    id: 1,
+    email: 'demo@vormir.com',
+    password: '$2b$10$Q8fP6NZohGuHBt4MMmfJbO4/1vaONCrUBnpRKmQ3U/L53z4mTl8HW'
+  }];
   private idCounter = 1;
+
+  
 
   constructor(private jwtService: JwtService) {}
 
@@ -23,6 +29,7 @@ export class AuthService {
   }
 
   async login(email: string, password: string) {
+    console.log('user data', this.users);
     const user = this.users.find(u => u.email === email);
     if (!user) throw new UnauthorizedException('Invalid credentials');
 
