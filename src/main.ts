@@ -7,7 +7,7 @@ async function bootstrap() {
 
   // ✅ Enable CORS for multiple origins
   app.enableCors({
-    origin: ['http://localhost:3000', 'http://localhost:3001'],
+    origin: ['http://localhost:3000', 'http://localhost:3001', 'https://the-story-isnt-over.vercel.app/', 'https://the-story-isnt-over.vercel.app'],
     credentials: true,
   });
 
