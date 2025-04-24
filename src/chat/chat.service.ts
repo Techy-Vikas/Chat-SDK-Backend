@@ -83,7 +83,10 @@ Your tone is always calm, empathetic, and hopeful.
       console.log('transcription from buffer: ', transcription);
 
       // Send the transcription to ChatGPT
-      return this.askGPT(transcription);
+     
+      return  {
+        response: transcription,
+      };
     } catch (error) {
       console.error('Error transcribing audio:', error);
       throw error;
