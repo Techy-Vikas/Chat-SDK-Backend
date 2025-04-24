@@ -58,16 +58,6 @@ Your tone is always calm, empathetic, and hopeful.
     };
   }
 
-  async transcribeAndAsk(audioFilePath: string) {
-    const transcription = await this.openai.audio.transcriptions.create({
-      file: fs.createReadStream(audioFilePath),
-      model: 'whisper-1',
-      response_format: 'text',
-    });
-    console.log('transcription: ', transcription);
-    return this.askGPT(transcription);
-  }
-
   async transcribeAndAskFromBuffer(buffer: Buffer, filename: string) {
     try {
       // Convert buffer to a file object that OpenAI can use
@@ -78,13 +68,14 @@ Your tone is always calm, empathetic, and hopeful.
         file: fileObject,
         model: 'whisper-1',
         response_format: 'text',
+        language: 'en',
       });
 
       console.log('transcription from buffer: ', transcription);
 
       // Send the transcription to ChatGPT
-     
-      return  {
+
+      return {
         response: transcription,
       };
     } catch (error) {
